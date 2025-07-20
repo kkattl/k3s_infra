@@ -1,0 +1,26 @@
+- name: Bootstrap all nodes
+  hosts: all
+  become: yes
+  roles:
+    - bootstrap          
+
+- name: Install k3s server
+  hosts: k3s_servers
+  become: yes
+  roles:
+    - role: xanmanning.k3s
+      vars:
+        k3s_state: installed
+        k3s_control_node: true
+        k3s_server_cluster_init: true
+
+- name: Install k3s agents
+  hosts: k3s_agents
+  become: yes
+  roles:
+    - role: xanmanning.k3s
+      vars:
+        k3s_state: installed
+        k3s_control_node: false
+        k3s_agent_server: "https://{{ hostvars['master']['ansible_host'] }}:6443"
+        k3s_agent_token: "{{ hostvars['master']['k3s_server_token'] }}"
