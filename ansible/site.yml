@@ -12,7 +12,6 @@
       vars:
         k3s_state: installed
         k3s_control_node: true
-        k3s_server_cluster_init: true
 
 - name: Install k3s agents
   hosts: k3s_agents
