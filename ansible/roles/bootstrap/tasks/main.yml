@@ -1,7 +1,7 @@
 - name: Update apt cache
   ansible.builtin.apt:
     update_cache: yes
-    cache_valid_time: 3600           
+    cache_valid_time: 3600
 
 - name: Install base packages
   ansible.builtin.apt:
@@ -10,7 +10,7 @@
       - curl
     state: present
 
-- name: Ensure ansible user has no‑password sudo
+- name: Ensure ansible user has no-password sudo
   ansible.builtin.copy:
     dest: /etc/sudoers.d/ansible
     content: 'ansible ALL=(ALL) NOPASSWD:ALL'
