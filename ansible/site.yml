@@ -20,3 +20,9 @@
     k3s_agent_server: "https://{{ hostvars[groups['k3s_servers'][0]]['ansible_default_ipv4']['address'] }}:6443"
     k3s_agent_token: "{{ hostvars[groups['k3s_servers'][0]]['k3s_server_token'] }}"
 
+- name: Install Helm 
+  hosts: k3s_servers
+  become: yes
+  roles:
+    - install_helm
+

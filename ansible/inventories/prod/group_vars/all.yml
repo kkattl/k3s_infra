@@ -5,4 +5,3 @@ k3s_server_disable:
 k3s_primary_control_node: master
 k3s_control_group: k3s_servers
 k3s_cluster_group: k3s_cluster
-
