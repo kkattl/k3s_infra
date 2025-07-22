@@ -17,5 +17,6 @@
   roles:
     - k3s_agent
   vars:
-    k3s_agent_server: "https://{{ hostvars['master']['ansible_default_ipv4']['address'] }}:6443"
-    k3s_agent_token: "{{ hostvars['master']['k3s_server_token'] }}"
+    k3s_agent_server: "https://{{ hostvars[groups['k3s_servers'][0]]['ansible_default_ipv4']['address'] }}:6443"
+    k3s_agent_token: "{{ hostvars[groups['k3s_servers'][0]]['k3s_server_token'] }}"
+
