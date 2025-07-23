@@ -1,0 +1,14 @@
+- name: Ensure required namespaces exist
+  kubernetes.core.k8s:
+    kubeconfig: "{{ kubeconfig_path | default('/home/ansible/.kube/config') }}"
+    state: present
+    definition:
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: "{{ item }}"
+  loop:
+    - data
+    - myapp
+  loop_control:
+    label: "{{ item }}"

@@ -1,13 +1,16 @@
 - name: Deploy Helm charts
   kubernetes.core.helm:
-    name: "{{ item.key }}"                       
-    chart_ref: "{{ charts_dir }}/{{ item.key }}" 
+    kubernetes.core.helm:
+    name: "{{ item.key }}"
+    chart_ref: "{{ charts_dir }}/{{ item.key }}"
     release_namespace: "{{ item.value }}"
-    release_state: present
     create_namespace: true
     atomic: true
     wait: true
     update_repo_cache: true
+    kubeconfig: "{{ kubeconfig_path }}"
+    release_namespace: "{{ item.value }}"
+    create_namespace: true
   loop: "{{ namespace_map | dict2items }}"
   loop_control:
     label: "{{ item.key }}"

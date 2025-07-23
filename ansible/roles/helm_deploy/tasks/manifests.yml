@@ -10,6 +10,7 @@
   kubernetes.core.k8s:
     state: present
     src: "{{ item.path }}"
+    kubeconfig: "{{ kubeconfig_path }}"
   loop: "{{ manifest_files.files }}"
   loop_control:
     label: "{{ item.path | basename }}"
