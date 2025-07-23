@@ -1,0 +1,15 @@
+- name: Install Helm
+  ansible.builtin.shell: |
+    curl -fsSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+  args:
+    creates: /usr/local/bin/helm
+
+- name: Install git package
+  ansible.builtin.apt:
+    name: git
+    state: present
+
+- name: Install helm-git plugin
+  ansible.builtin.command: helm plugin install https://github.com/aslafy-z/helm-git.git
+  args:
+    creates: /root/.local/share/helm/plugins/helm-git
