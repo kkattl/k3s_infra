@@ -1,0 +1,16 @@
+repo_url: "https://github.com/kkattl/helm"
+repo_version: "main"
+checkout_dir: "/home/ansible/helm-src"
+
+charts_dir: "{{ checkout_dir }}/charts"
+manifests_dir: "{{ checkout_dir }}/manifests"
+namespace_map:
+  frontend: myapp
+  backend: myapp
+  postgres: data
+  redis: data
+
+pg_user: ""
+pg_pass: ""
+redis_pass: ""
+backend_secret_extra: {}    

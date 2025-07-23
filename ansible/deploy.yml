@@ -1,0 +1,7 @@
+- name: Deploy Helm charts from git
+  hosts: k3s_servers         
+  become: yes
+  vars_files:
+    - vars/secrets.yml
+  roles:
+    - role: helm_deploy

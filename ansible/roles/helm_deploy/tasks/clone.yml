@@ -1,0 +1,9 @@
+- name: Clone or update repo {{ repo_url }}
+  ansible.builtin.git:
+    repo: "{{ repo_url }}"
+    version: "{{ repo_version }}"
+    dest: "{{ checkout_dir }}"
+    update: yes
+    force: yes          
+  register: git_result
+  changed_when: git_result.after != git_result.before
