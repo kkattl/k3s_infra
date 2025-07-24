@@ -1,0 +1,26 @@
+replicaCount: 2
+
+image:
+  repository: docker.io/kkattl/backend
+  tag: latest                 
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 8080
+
+env:
+  DB_ENDPOINT: postgres-postgresql.data.svc.cluster.local
+  DATABASE: mydb
+  USERNAME: myuser
+  USERPASSWORD: SuperSecret123
+  CACHE_ENDPOINT: redis-master.data.svc.cluster.local
+
+ingress:
+  enabled: true
+  host: habast.top
+  path: /api              
+  pathType: Prefix
+  tls:
+    enabled: true
+    secretName: habast-top-tls
