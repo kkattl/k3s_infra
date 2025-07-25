@@ -1,0 +1,26 @@
+- name: Download Helm installer
+  become: yes
+  get_url:
+    url: https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+    dest: /tmp/get-helm-3
+    mode: "0755"
+    force: no  
+    
+- name: Run Helm installer
+  become: yes
+  command: /tmp/get-helm-3
+  args:
+    creates: /usr/local/bin/helm
+
+- name: Install git package
+  ansible.builtin.apt:
+    name: git
+    state: present
+
+- name: Install helm-git plugin
+  ansible.builtin.command: helm plugin install https://github.com/aslafy-z/helm-git.git
+  args:
+    creates: /root/.local/share/helm/plugins/helm-git
+
+- debug:
+    msg: ">>> install_helm role is LOADED"

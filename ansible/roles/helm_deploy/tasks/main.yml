@@ -1,0 +1,8 @@
+- import_tasks: kubeconfig.yml
+- import_tasks: prereqs.yml
+- import_tasks: namespaces.yml 
+- import_tasks: cert_manager.yml 
+- import_tasks: clone.yml
+- import_tasks: secrets.yml
+- import_tasks: manifests.yml
+- import_tasks: helm.yml

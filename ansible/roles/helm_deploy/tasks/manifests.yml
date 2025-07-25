@@ -1,0 +1,16 @@
+- name: Collect manifest files
+  ansible.builtin.find:
+    paths: "{{ manifests_dir }}"
+    patterns: "*.y[a]ml"
+    recurse: true
+  register: manifest_files
+
+- name: Apply manifests
+  when: manifest_files.matched > 0         
+  kubernetes.core.k8s:
+    state: present
+    src: "{{ item.path }}"
+    kubeconfig: "{{ kubeconfig_path }}"
+  loop: "{{ manifest_files.files }}"
+  loop_control:
+    label: "{{ item.path | basename }}"
